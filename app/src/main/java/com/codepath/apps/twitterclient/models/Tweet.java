@@ -3,15 +3,20 @@ package com.codepath.apps.twitterclient.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Tweet {
 
-    private String body;
-    private String createdAt;
-    private User user;
+    String body;
+    String createdAt;
+    User user;
+
+    // Needed for Parceler library
+    public Tweet() {}
 
     public Tweet(String body, String createdAt, User user) {
         this.body = body;
