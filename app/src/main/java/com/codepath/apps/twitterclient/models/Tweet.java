@@ -14,20 +14,31 @@ public class Tweet {
     String body;
     String createdAt;
     User user;
+    String mediaUrl;
 
     // Needed for Parceler library
     public Tweet() {}
 
-    public Tweet(String body, String createdAt, User user) {
+    public Tweet(String body, String createdAt, User user, String mediaUrl) {
         this.body = body;
         this.createdAt = createdAt;
         this.user = user;
+        this.mediaUrl = mediaUrl;
     }
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
+        String mediaUrl = "";
+        if(jsonObject.getJSONObject("entities").has("media")) {
+            JSONArray media = jsonObject.getJSONObject("entities").getJSONArray("media");
+            if(media.length() > 0) {
+                mediaUrl = media.getJSONObject(0).getString("media_url");
+            }
+        }
+
         return new Tweet(jsonObject.getString("text"),
                 jsonObject.getString("created_at"),
-                User.fromJson(jsonObject.getJSONObject("user")));
+                User.fromJson(jsonObject.getJSONObject("user")),
+                mediaUrl);
     }
 
     public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException {
@@ -51,5 +62,9 @@ public class Tweet {
 
     public User getUser() {
         return user;
+    }
+
+    public String getMediaUrl() {
+        return mediaUrl;
     }
 }
