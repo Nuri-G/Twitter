@@ -38,7 +38,6 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
     List<Tweet> tweetList;
     TweetsAdapter adapter;
-    Button bLogOut;
     SwipeRefreshLayout swipeContainer;
 
     ActivityResultLauncher launcher = registerForActivityResult(
@@ -87,15 +86,6 @@ public class TimelineActivity extends AppCompatActivity {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-
-        bLogOut = findViewById(R.id.bLogOut);
-        bLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onLogoutButton();
-            }
-        });
         populateHomeTimeline();
     }
 
@@ -144,6 +134,10 @@ public class TimelineActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ComposeActivity.class);
             launcher.launch(intent);
             return true;
+        }
+
+        if(item.getItemId() == R.id.logOut) {
+            onLogoutButton();
         }
         return super.onOptionsItemSelected(item);
     }
