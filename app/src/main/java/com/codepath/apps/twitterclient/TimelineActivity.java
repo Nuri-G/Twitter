@@ -16,8 +16,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.codepath.apps.twitterclient.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
